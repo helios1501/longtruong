@@ -139,7 +139,7 @@ export default function LuckySpin() {
   return (
     <div className="spin-container">
       <video className="bg-video" autoPlay loop muted playsInline>
-        <source src="/bg-tet.mp4" type="video/mp4" />
+        <source src="/bg.mp4" type="video/mp4" />
       </video>
       {showConfetti && (
         <Confetti width={window.innerWidth} height={window.innerHeight} />
