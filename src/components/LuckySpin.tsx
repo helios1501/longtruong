@@ -148,7 +148,7 @@ export default function LuckySpin() {
       {/* Title */}
       <div className="bg-overlay"></div>
       <div className="title">
-        <h1>Hội Xuân Hương Tết Việt <br />Bính Ngọ 2026</h1>
+        <h1>Hội Xuân Hương Sắc Tết Việt <br />Bính Ngọ 2026</h1>
         <h2>
           🎟 Vé số may mắn 🎟
         </h2>
