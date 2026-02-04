@@ -25,9 +25,9 @@ body {
   align-items: center;
   justify-content: flex-start;
   position: relative;
-
+  overflow-x: hidden;
   video {
-    position: absolute;
+    position: fixed;
     inset: 0;
     margin: auto;
   }
@@ -258,7 +258,7 @@ body {
 
 /* Overlay để chữ rõ hơn */
 .bg-overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
 
   background: rgba(0, 0, 0, 0.35); /* làm tối nhẹ */
