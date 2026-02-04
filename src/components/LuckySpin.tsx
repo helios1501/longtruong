@@ -138,13 +138,17 @@ export default function LuckySpin() {
 
   return (
     <div className="spin-container">
+      <video className="bg-video" autoPlay loop muted playsInline>
+        <source src="/bg-tet.mp4" type="video/mp4" />
+      </video>
       {showConfetti && (
         <Confetti width={window.innerWidth} height={window.innerHeight} />
       )}
 
       {/* Title */}
+      <div className="bg-overlay"></div>
       <div className="title">
-        <h1>Hội Xuân Hương Tết Việt <br/>Bính Ngọ 2026</h1>
+        <h1>Hội Xuân Hương Tết Việt <br />Bính Ngọ 2026</h1>
         <h2>
           🎟 Vé số may mắn 🎟
         </h2>
