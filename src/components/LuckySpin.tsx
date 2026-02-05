@@ -5,6 +5,7 @@ import { saveAs } from "file-saver";
 import "./style.scss";
 
 export default function LuckySpin() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   // Range vé số
   const MIN = 2004;
   const MAX = 4805;
@@ -18,7 +19,7 @@ export default function LuckySpin() {
   // Modal + Winner
   const [showModal, setShowModal] = useState(false);
   const [winnerNumber, setWinnerNumber] = useState("");
-
+  const [isDisabled, setIsDisabled] = useState(false)
   // Confetti
   const [showConfetti, setShowConfetti] = useState(false);
 
@@ -37,10 +38,23 @@ export default function LuckySpin() {
   };
 
   // Sound ting
-  const playSound = () => {
-    const audio = new Audio("/ting.mp3");
-    audio.play();
+  const initAudio = () => {
+    if (!audioRef.current) {
+      const audio = new Audio("/audio.mp3");
+      audio.loop = true;
+      audioRef.current = audio;
+    }
   };
+  const playSound = () => {
+    initAudio();
+    audioRef.current?.play();
+  };
+  const stopSound = () => {
+    if (!audioRef.current) return;
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+  };
+
 
   // Export Excel
   const exportExcel = () => {
@@ -76,6 +90,7 @@ export default function LuckySpin() {
     setShowModal(false);
     setShowConfetti(false);
     setSpinning(true);
+    playSound();
 
     // Quay liên tục (random digit)
     spinInterval.current = setInterval(() => {
@@ -93,7 +108,7 @@ export default function LuckySpin() {
   // ==========================
   const handleStop = async () => {
     if (!spinning) return;
-
+    setIsDisabled(true);
     clearInterval(spinInterval.current);
 
     // Chọn vé không trùng
@@ -129,7 +144,7 @@ export default function LuckySpin() {
 
     setShowModal(true);
     setShowConfetti(true);
-    playSound();
+    stopSound();
 
     setTimeout(() => setShowConfetti(false), 5000);
 
@@ -170,7 +185,7 @@ export default function LuckySpin() {
             🎰 QUAY
           </button>
         ) : (
-          <button className="spin-btn stop-btn" onClick={handleStop}>
+          <button className="spin-btn stop-btn" onClick={handleStop} disabled={isDisabled}>
             ✋ DỪNG
           </button>
         )}
@@ -199,7 +214,7 @@ export default function LuckySpin() {
 
             <div className="modal-number">{winnerNumber}</div>
 
-            <button className="close-btn" onClick={() => setShowModal(false)}>
+            <button className="close-btn" onClick={() => { setShowModal(false); setIsDisabled(false) }}>
               Đóng
             </button>
           </div>
