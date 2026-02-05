@@ -274,12 +274,13 @@ body {
   z-index: 2;
 }
 .wrap-logo {
-  margin: 0;
   position: absolute;
   z-index: 2;
-  width: 9vw;
-  top: 0;
+  width: 6vw;
+  top: 20px;
   left: 0;
+  right: 0;
+  margin: auto;
   img {
     max-width: 100%;
     height: auto;
