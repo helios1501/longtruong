@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
@@ -40,7 +40,7 @@ export default function LuckySpin() {
   // Sound ting
   const initAudio = () => {
     if (!audioRef.current) {
-      const audio = new Audio("/audio.mp3");
+      const audio = new Audio("/spin.mp3");
       audio.loop = true;
       audioRef.current = audio;
     }
@@ -53,6 +53,8 @@ export default function LuckySpin() {
     if (!audioRef.current) return;
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
+    const audio = new Audio("/ting.mp3");
+    audio.play();
   };
 
 
@@ -151,6 +153,26 @@ export default function LuckySpin() {
     setSpinning(false);
   };
 
+  useEffect(() => {
+    const handleClick = () => {
+      const audio = document.getElementById("bg") as HTMLAudioElement | null;
+      if (!audio) return;
+
+      audio.muted = false;
+      audio.volume = 1;
+      // đảm bảo đang chạy
+      audio.play().catch(() => { });
+
+      document.removeEventListener("click", handleClick);
+    };
+
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
+
   return (
     <div className="spin-container">
       <video className="bg-video" autoPlay loop muted playsInline>
@@ -204,6 +226,14 @@ export default function LuckySpin() {
           ))}
         </div>
       </div>
+      <audio
+        id="bg"
+        src="/game.mp3"
+        autoPlay
+        muted
+        loop
+        preload="auto"
+      />
 
       {/* Modal */}
       {showModal && (
