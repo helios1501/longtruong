@@ -273,3 +273,15 @@ body {
   position: relative;
   z-index: 2;
 }
+.wrap-logo {
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+  width: 9vw;
+  top: 0;
+  left: 0;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}

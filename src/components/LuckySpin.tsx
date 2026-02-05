@@ -178,6 +178,7 @@ export default function LuckySpin() {
       <video className="bg-video" autoPlay loop muted playsInline>
         <source src="/bg.mp4" type="video/mp4" />
       </video>
+      <p className="wrap-logo"><img src="/logo.jpg" alt="" /></p>
       {showConfetti && (
         <Confetti width={window.innerWidth} height={window.innerHeight} />
       )}
